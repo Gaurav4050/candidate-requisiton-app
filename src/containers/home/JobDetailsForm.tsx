@@ -82,7 +82,7 @@ const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
           <Button colorScheme="gray" type="button" onClick={() => setPage(page - 1)}>
             Previous
           </Button>
-          <Button colorScheme="red" type="submit">
+          <Button colorScheme="red" type="submit" onClick={() => setPage(page + 1)}>
             Next
           </Button>
         </Flex>
