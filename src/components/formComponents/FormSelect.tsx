@@ -29,20 +29,24 @@ const FormSelect: React.FC<IFormSelectProps> = ({
   options,
 }) => {
   const theme = useTheme();
-
-  const { updateRequisitionDetails,state,updateInterviewSettings } = useData();
+  const { updateRequisitionDetails, updateInterviewSettings } = useData();
 
   const handleChange = (value: any) => {
-    console.log(name)
-console.log(value)
     onChange && onChange(name, value?.value);
-    name==='urgency' && updateRequisitionDetails({ urgency: value.label });
-    name==='gender' && updateRequisitionDetails({ gender: value.label });
-    name==='interviewMode' && updateInterviewSettings({ interviewMode: value.label });
-    name==='interviewDuration' && updateInterviewSettings({ interviewDuration: value.label });
-    name==='interviewLanguage' && updateInterviewSettings({ interviewLanguage: value.label });
 
+    if (name === "urgency") {
+      updateRequisitionDetails({ urgency: value.label });
+    } else if (name === "gender") {
+      updateRequisitionDetails({ gender: value.label });
+    } else if (name === "interviewMode") {
+      updateInterviewSettings({ interviewMode: value.label });
+    } else if (name === "interviewDuration") {
+      updateInterviewSettings({ interviewDuration: value.label });
+    } else if (name === "interviewLanguage") {
+      updateInterviewSettings({ interviewLanguage: value.label });
+    }
   };
+
   const handleBlur = () => {
     onBlur && onBlur(name, true);
   };
@@ -56,57 +60,53 @@ console.log(value)
       error={error as string}
       touched={touched}
     >
-     // ...
-
-<ReactSelect
-  name={name}
-  placeholder={placeholder}
-  value={options.find((item: { value: string }) => item?.value === value)}
-  onChange={handleChange}
-  onBlur={handleBlur}
-  options={options}
-  styles={{
-    container: (base) => ({
-      ...base,
-      width: "100%",
-      minWidth: "none",
-      height: "auto",
-      maxHeight: "none",
-      minHeight: "none",
-    }),
-    control: (base, { isFocused }) => ({
-      ...base,
-      width: "100%",
-      minWidth: "272px",
-      height: "45px",
-      border: isFocused
-        ? `1px solid ${theme.colors.primary}`
-        : error
-        ? `1px solid ${theme.colors.errorRed}`
-        : "1px solid #c0bcd7",
-      backgroundColor: theme.colors.inputBg,
-      zIndex:100,
-      borderRadius: "10px",
-      fontSize: ".875rem",
-      fontWeight: "500",
-      "&:hover": {
-        border: `1px solid ${theme.colors.primary}`,
-      },
-    }),
-    valueContainer: (base) => ({
-      ...base,
-      paddingLeft: "20px",
-    }),
-    option: (base, { isFocused }) => ({
-      ...base,
-      fontSize: ".875rem",
-      fontWeight: "500",
-      
-    }),
-    
-  }}
-/>
-
+      <ReactSelect
+        name={name}
+        placeholder={placeholder}
+        value={options.find((item: { value: string }) => item?.value === value)}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        options={options}
+        styles={{
+          container: (base) => ({
+            ...base,
+            width: "100%",
+            minWidth: "none",
+            height: "auto",
+            maxHeight: "none",
+            minHeight: "none",
+          }),
+          control: (base, { isFocused }) => ({
+            ...base,
+            width: "100%",
+            minWidth: "272px",
+            height: "45px",
+            border: isFocused
+              ? `1px solid ${theme.colors.primary}`
+              : error
+              ? `1px solid ${theme.colors.errorRed}`
+              : "1px solid #c0bcd7",
+            backgroundColor: theme.colors.inputBg,
+            zIndex: 100,
+            borderRadius: "10px",
+            fontSize: ".875rem",
+            fontWeight: "500",
+            "&:hover": {
+              border: `1px solid ${theme.colors.primary}`,
+            },
+          }),
+          valueContainer: (base) => ({
+            ...base,
+            paddingLeft: "20px",
+          }),
+          option: (base, { isFocused }) => ({
+            ...base,
+            fontSize: ".875rem",
+            fontWeight: "500",
+          }),
+        }}
+        {...selectProps}
+      />
       {children}
     </FromWrapper>
   );
