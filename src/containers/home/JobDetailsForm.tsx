@@ -7,7 +7,12 @@ import FormInput from "../../components/formComponents/FormInput";
 import { IJobDetails } from "../../interface/forms";
 import { useData } from "./DataProvider";
 
-const JobDetailsForm: React.FC = ({page,setPage}) => {
+interface JobDetailsFormProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
   const { handleChange, errors, touched, handleBlur, handleSubmit, values } =
     useFormik<IJobDetails>({
       initialValues: {
@@ -23,13 +28,14 @@ const JobDetailsForm: React.FC = ({page,setPage}) => {
       }),
       onSubmit: (values) => {
         console.log({ values });
-        setPage(page+1)
+        setPage(page + 1);
       },
     });
 
-  const { updateJobDetails,state } = useData();
+  const { updateJobDetails, state } = useData();
 
-console.log("Satar",state)
+  console.log("Start", state);
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -73,10 +79,10 @@ console.log("Satar",state)
           value={values.jobLocation}
         />
         <Flex w="100%" justify="flex-end" mt="4rem" gap="20px">
-          <Button colorScheme="gray" type="button" onClick={()=>{setPage(page-1)}}>
+          <Button colorScheme="gray" type="button" onClick={() => setPage(page - 1)}>
             Previous
           </Button>
-          <Button colorScheme="red" type="submit" onClick={()=>setPage(page+1)}>
+          <Button colorScheme="red" type="submit">
             Next
           </Button>
         </Flex>

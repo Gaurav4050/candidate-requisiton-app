@@ -24,8 +24,8 @@ const CustomTab: React.FC<TabProps> = ({ children, ...props }) => {
   );
 };
 
-const HomeLayout = () => {
-  const [page, setPage] = useState(0);
+const HomeLayout: React.FC = () => {
+  const [page, setPage] = useState<number>(0);
 
   return (
     <Box w="100%">

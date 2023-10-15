@@ -9,7 +9,12 @@ import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
 import { useData } from "../../containers/home/DataProvider";
 
-const RequisitionDetailsForm: React.FC = ({page,setPage}) => {
+interface RequisitionDetailsFormProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const RequisitionDetailsForm: React.FC<RequisitionDetailsFormProps> = ({ page, setPage }) => {
   const {
     handleChange,
     errors,
@@ -37,13 +42,13 @@ const RequisitionDetailsForm: React.FC = ({page,setPage}) => {
       gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: (values) => {
-      console.log(page)
-      setPage(page+1)
+      console.log(page);
+      setPage(page + 1);
     },
-    
   });
-  const { updateRequisitionDetails,state } = useData();
-  console.log(state);
+
+  const { updateRequisitionDetails, state } = useData();
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -67,16 +72,14 @@ const RequisitionDetailsForm: React.FC = ({page,setPage}) => {
           type="number"
           onChange={(e) => {
             handleChange(e);
-            updateRequisitionDetails({ noOfOpenings: Number(e.target.value)});
+            updateRequisitionDetails({ noOfOpenings: Number(e.target.value) });
           }}
-
           onBlur={handleBlur}
           value={values?.noOfOpenings}
           error={errors?.noOfOpenings}
           touched={touched?.noOfOpenings}
         />
-      
-        <div style={{zIndex:"10"}}>
+
         <FormSelect
           label="Urgency"
           name="urgency"
@@ -88,8 +91,8 @@ const RequisitionDetailsForm: React.FC = ({page,setPage}) => {
           touched={touched.urgency}
           value={values.urgency}
         />
-        </div>
-          <FormSelect
+
+        <FormSelect
           label="Gender"
           name="gender"
           placeholder="Select gender"
@@ -100,6 +103,7 @@ const RequisitionDetailsForm: React.FC = ({page,setPage}) => {
           touched={touched.gender}
           value={values.gender}
         />
+
         <Flex w="100%" justify="flex-end" mt="4rem">
           <Button colorScheme="red" type="submit">
             Next

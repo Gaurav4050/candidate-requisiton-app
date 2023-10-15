@@ -10,7 +10,15 @@ import {
   interviewModeOptions,
 } from "./constants";
 
-const InterviewDetailsForm: React.FC = ({page,setPage}) => {
+interface InterviewDetailsFormProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const InterviewDetailsForm: React.FC<InterviewDetailsFormProps> = ({
+  page,
+  setPage,
+}) => {
   const {
     errors,
     touched,
@@ -67,7 +75,7 @@ const InterviewDetailsForm: React.FC = ({page,setPage}) => {
           value={values.interviewLanguage}
         />
         <Flex w="100%" justify="flex-end" mt="4rem" gap="20px">
-          <Button colorScheme="gray" type="button" onClick={()=>setPage(page-1)}>
+          <Button colorScheme="gray" type="button" onClick={() => setPage(page - 1)}>
             Previous
           </Button>
           <Button colorScheme="red" type="submit">
