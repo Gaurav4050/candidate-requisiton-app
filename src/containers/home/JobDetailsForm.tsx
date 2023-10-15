@@ -13,7 +13,16 @@ interface JobDetailsFormProps {
 }
 
 const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
-  const { handleChange, errors, touched, handleBlur, handleSubmit, values } =
+  const {
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    handleSubmit,
+    values,
+    setFieldTouched,
+    setFieldValue,
+  } =
     useFormik<IJobDetails>({
       initialValues: {
         jobTitle: "",
@@ -24,10 +33,8 @@ const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
         jobTitle: Yup.string().required("Job Title is required"),
         jobDetails: Yup.string().required("Job Details is required"),
         jobLocation: Yup.string().required("Job Location is required"),
-        jobPosition: Yup.string().required("Job position is required"),
       }),
       onSubmit: (values) => {
-        console.log({ values });
         setPage(page + 1);
       },
     });
@@ -82,8 +89,8 @@ const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
           <Button colorScheme="gray" type="button" onClick={() => setPage(page - 1)}>
             Previous
           </Button>
-          <Button colorScheme="red" type="submit" onClick={() => setPage(page + 1)}>
-            Next
+          <Button colorScheme="red" type="submit" >
+            Next2
           </Button>
         </Flex>
       </Box>
