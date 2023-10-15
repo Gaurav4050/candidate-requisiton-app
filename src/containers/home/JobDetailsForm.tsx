@@ -90,7 +90,7 @@ const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ page, setPage }) => {
             Previous
           </Button>
           <Button colorScheme="red" type="submit" >
-            Next2
+            Next
           </Button>
         </Flex>
       </Box>
